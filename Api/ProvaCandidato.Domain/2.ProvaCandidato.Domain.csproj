@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cidade\CidadeService.cs" />
+    <Compile Include="Cidade\Dtos\CidadeDto.cs" />
+    <Compile Include="Cidade\ICidadeRepository.cs" />
+    <Compile Include="Cidade\ICidadeService.cs" />
     <Compile Include="Health\HealthService.cs" />
     <Compile Include="Health\Dtos\HealthDto.cs" />
     <Compile Include="Health\IHealthService.cs" />

@@ -14,7 +14,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-  </PropertyGroup>  
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Staging|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Staging\</OutputPath>
@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CidadeRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
