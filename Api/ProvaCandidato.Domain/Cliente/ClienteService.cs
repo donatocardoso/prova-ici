@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ProvaCandidato.Domain.Cliente
 {
-    public class ClienteService
+    public class ClienteService : IClienteService
     {
         private readonly IClienteRepository _clienteRepository;
 

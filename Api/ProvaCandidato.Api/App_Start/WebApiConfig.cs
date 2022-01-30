@@ -1,7 +1,9 @@
 ﻿using ProvaCandidato.Api.Resolver;
 using ProvaCandidato.Domain.Cidade;
+using ProvaCandidato.Domain.Cliente;
 using ProvaCandidato.Domain.Health;
 using ProvaCandidato.Repositories.Cidade;
+using ProvaCandidato.Repositories.Cliente;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using Unity;
@@ -32,10 +34,12 @@ namespace ProvaCandidato.Api
             // Services
 
             container.RegisterType<ICidadeService, CidadeService>();
+            container.RegisterType<IClienteService, ClienteService>();
             container.RegisterType<IHealthService, HealthService>();
 
             // Repositories
             container.RegisterType<ICidadeRepository, CidadeRepository>();
+            container.RegisterType<IClienteRepository, ClienteRepository>();
 
             return container;
         }
