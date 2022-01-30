@@ -6,14 +6,43 @@
 
     <title>@ViewBag.Title - Prova Candidado(a) ASP.NET MVC</title>
 
-    @Styles.Render("~/Assets/css")
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet" />
+
+    @Styles.Render("~/bundles/css")
+
+    <link href="~/Content/geral.css" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/modernizr")
 
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
     @RenderSection("head", required: false)
+
+    <style type="text/css">
+        div#alerts {
+            bottom: 0;
+            width: 100%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            z-index: 10000;
+            font-style: italic;
+        }
+
+            div#alerts .alert {
+                display: flex;
+                align-items: center;
+            }
+    </style>
 </head>
+
 <body>
+    <div id="alerts"></div>
+
     <div class="container body-content">
-        <h1 class="title">Parametrize o Nome da Empresa Aqui</h1>
+        <h1 class="title">@ViewBag.NomeEmpresa</h1>
+
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="navbar-header">
@@ -35,24 +64,17 @@
         </div>
 
         <div id="conteudo">
-            @if (@TempData["UserMessage"] != null)
-            {
-                <div id="alert-success" class="alert alert-success">
-                    <strong>Sucesso</strong> @TempData["UserMessage"]
-                </div>
-                TempData["UserMessage"] = null;
-            }
-
             @RenderBody()
         </div>
 
         <footer>
-            <div class="linha">2017 &copy; - Parametrize o Nome da Empresa Aqui</div>
+            <div class="linha">2017 &copy; - @ViewBag.NomeEmpresa</div>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript">
+        const Alert = $("#alerts");
+    </script>
 
     @RenderSection("scripts", required: false)
 </body>

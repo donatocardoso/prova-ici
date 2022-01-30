@@ -1,0 +1,95 @@
+﻿@using ProvaCandidato.Utils.Commons;
+@using ProvaCandidato.Application.ApiProvaCandidato.Cidade.Models;
+
+@model  IReturn<List<CidadeModel>>
+
+@{
+    ViewBag.Title = "Cidades";
+}
+
+<style type="text/css">
+    div.options {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+    }
+
+        div.options button {
+            margin-left: 15px;
+        }
+</style>
+
+<div class="col-12 options">
+    <button type="button" class="btn btn-success" onclick="AbrirCadastrar();">Cadastrar</button>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col" style="width: 10vw;">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.IsSuccess)
+        {
+            foreach (var cidade in Model.Content)
+            {
+                <tr>
+                    <th scope="row">@cidade.Codigo</th>
+                    <td>@cidade.Nome</td>
+                    <td>
+                        <span class="material-icons text-primary" onclick="AbrirAlterar(@cidade.Codigo);">edit</span>
+                        <span class="material-icons text-danger" onclick="Deletar(@cidade.Codigo, '@cidade.Nome');">delete</span>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th scope="row" colspan="3">@Model.Message</th>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div id="divModalCadastrar"></div>
+<div id="divModalAlterar"></div>
+
+<script type="text/javascript">
+    function AbrirCadastrar() {
+        $.ajax({
+            method: "GET",
+            url: "/Cidade/Cadastrar",
+        })
+            .done((data) => $("#divModalCadastrar").html(data))
+            .fail((xhr) => Alert.html(xhr.responseText));
+    }
+
+    function AbrirAlterar(codigo) {
+        $.ajax({
+            method: "GET",
+            url: `/Cidade/Alterar/${codigo}`,
+        })
+            .done((data) => $("#divModalAlterar").html(data))
+            .fail((xhr) => Alert.html(xhr.responseText));
+    }
+
+    function Deletar(codigo, nome) {
+        var yes = confirm(`Deseja realmente excluir a cidade '${nome}'?`);
+
+        if (yes) {
+            $.ajax({
+                method: "POST",
+                url: `/Cidade/Delete`,
+                data: {
+                    Codigo: codigo
+                }
+            })
+                .done((data) => $("html").html(data))
+                .fail((xhr) => Alert.html(xhr.responseText));
+        }
+    }
+</script>

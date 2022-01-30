@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Cadastrar Cidade";
+}
+
+<div id="modalCadastrar" class="modal fade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Cidade</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div id="divAlertas"></div>
+
+            <div class="modal-body">
+                <form>
+                    <label for="txtNome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="txtNome" aria-describedby="nomeHelp">
+                    <div id="nomeHelp" class="form-text">Tamanho entre 3 e 50 caracteres</div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                <button type="button" class="btn btn-primary" onclick="Cadastrar();">Cadastrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function Cadastrar() {
+        const nome = $("#txtNome").val();
+
+        if (!nome) {
+            return alert("Por favor informe o nome da cidade.");
+        }
+
+        if (nome.trim().length < 3) {
+            return alert("Por favor informe o nome da cidade, com mais de 3 caracteres.");
+        }
+
+        if (nome.trim().length > 50) {
+            return alert("Por favor informe o nome da cidade, com menos de 50 caracteres.");
+        }
+
+        $.ajax({
+            method: "POST",
+            url: "/Cidade/Post",
+            data: {
+                Nome: nome
+            },
+        })
+            .done((data) => $("html").html(data))
+            .fail((xhr) => Alert.html(xhr.responseText));
+    }
+
+    $(document).ready(function () {
+        var ModalCadastrar = new bootstrap.Modal($('#modalCadastrar'), {
+            keyboard: false
+        })
+
+        ModalCadastrar.show();
+    })
+</script>

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente
 {
-    public class ClienteApplication : IClienteApplication
+    public class ClienteApplication
     {
         private readonly RestClient _restClient;
 

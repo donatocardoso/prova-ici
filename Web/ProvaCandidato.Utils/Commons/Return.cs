@@ -2,34 +2,34 @@
 {
     public static class Return
     {
-        public static ReturnDto Success(string message)
+        public static ReturnModel Success(string message)
         {
-            return new ReturnDto(true, message);
+            return new ReturnModel(true, message);
         }
 
-        public static ReturnDto<T> Success<T>(string message)
+        public static ReturnModel<T> Success<T>(string message)
         {
-            return new ReturnDto<T>(true, message);
+            return new ReturnModel<T>(true, message);
         }
 
-        public static ReturnDto<T> Success<T>(string message, T content)
+        public static ReturnModel<T> Success<T>(string message, T content)
         {
-            return new ReturnDto<T>(true, message, content);
+            return new ReturnModel<T>(true, message, content);
         }
 
-        public static ReturnDto Fail(string message)
+        public static ReturnModel Fail(string message)
         {
-            return new ReturnDto(false, message);
+            return new ReturnModel(false, message);
         }
 
-        public static ReturnDto<T> Fail<T>(string message)
+        public static ReturnModel<T> Fail<T>(string message)
         {
-            return new ReturnDto<T>(false, message);
+            return new ReturnModel<T>(false, message);
         }
 
-        public static ReturnDto<T> Fail<T>(string message, T content = default)
+        public static ReturnModel<T> Fail<T>(string message, T content = default)
         {
-            return new ReturnDto<T>(false, message, content);
+            return new ReturnModel<T>(false, message, content);
         }
     }
 }

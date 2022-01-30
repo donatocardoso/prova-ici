@@ -1,0 +1,11 @@
+﻿@model string
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    @Model
+
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<script type="text/javascript">
+    setTimeout(() => Alert.empty(), 5000);
+</script>

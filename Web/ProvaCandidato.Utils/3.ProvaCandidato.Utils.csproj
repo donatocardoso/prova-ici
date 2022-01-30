@@ -45,7 +45,7 @@
   <ItemGroup>
     <Compile Include="Commons\IReturn.cs" />
     <Compile Include="Commons\Return.cs" />
-    <Compile Include="Commons\ReturnDto.cs" />
+    <Compile Include="Commons\ReturnModel.cs" />
     <Compile Include="Environment\WebEnvironment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
