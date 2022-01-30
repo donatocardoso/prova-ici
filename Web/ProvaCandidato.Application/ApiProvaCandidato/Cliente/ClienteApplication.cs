@@ -1,68 +1,68 @@
 ﻿using Newtonsoft.Json;
-using ProvaCandidato.Application.ApiProvaCandidato.Cidade.Models;
+using ProvaCandidato.Application.ApiProvaCandidato.Cliente.Models;
 using ProvaCandidato.Utils.Commons;
 using ProvaCandidato.Utils.Environment;
 using RestSharp;
 using System.Collections.Generic;
 
-namespace ProvaCandidato.Application.ApiProvaCandidato.Cidade
+namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente
 {
-    public class CidadeApplication
+    public class ClienteApplication
     {
         private readonly RestClient _restClient;
 
-        public CidadeApplication()
+        public ClienteApplication()
         {
             _restClient = new RestClient(WebEnvironment.ApiProvaCandidato);
         }
 
-        public IReturn<IEnumerable<CidadeModel>> GetAll()
+        public IReturn<IEnumerable<ClienteModel>> GetAll()
         {
-            var request = new RestRequest("Cidades/GetAll");
+            var request = new RestRequest("Clientes/GetAll");
 
             var response = _restClient.GetAsync(request).Result;
 
             if (!response.IsSuccessful)
             {
-                return Return.Fail<IEnumerable<CidadeModel>>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
+                return Return.Fail<IEnumerable<ClienteModel>>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn<IEnumerable<CidadeModel>>>(response.Content);
+            return JsonConvert.DeserializeObject<IReturn<IEnumerable<ClienteModel>>>(response.Content);
         }
 
-        public IReturn<CidadeModel> GetByCodigo(int codigo)
+        public IReturn<ClienteModel> GetByCodigo(int codigo)
         {
-            var request = new RestRequest($"Cidades/GetByCodigo/{codigo}");
+            var request = new RestRequest($"Clientes/GetByCodigo/{codigo}");
 
             var response = _restClient.GetAsync(request).Result;
 
             if (!response.IsSuccessful)
             {
-                return Return.Fail<CidadeModel>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
+                return Return.Fail<ClienteModel>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn<CidadeModel>>(response.Content);
+            return JsonConvert.DeserializeObject<IReturn<ClienteModel>>(response.Content);
         }
 
-        public IReturn<CidadeModel> GetByNome(string nome)
+        public IReturn<ClienteModel> GetByNome(string nome)
         {
-            var request = new RestRequest($"Cidades/GetByNome/{nome}");
+            var request = new RestRequest($"Clientes/GetByNome/{nome}");
 
             var response = _restClient.GetAsync(request).Result;
 
             if (!response.IsSuccessful)
             {
-                return Return.Fail<CidadeModel>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
+                return Return.Fail<ClienteModel>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn<CidadeModel>>(response.Content);
+            return JsonConvert.DeserializeObject<IReturn<ClienteModel>>(response.Content);
         }
 
-        public IReturn Post(CidadeModel cidade)
+        public IReturn Post(ClienteModel cliente)
         {
-            var request = new RestRequest("Cidades/Post");
+            var request = new RestRequest("Clientes/Post");
 
-            request.AddJsonBody(cidade);
+            request.AddJsonBody(cliente);
 
             var response = _restClient.GetAsync(request).Result;
 
@@ -74,11 +74,11 @@ namespace ProvaCandidato.Application.ApiProvaCandidato.Cidade
             return JsonConvert.DeserializeObject<IReturn>(response.Content);
         }
 
-        public IReturn Put(int codigo, CidadeModel cidade)
+        public IReturn Put(int codigo, ClienteModel cliente)
         {
-            var request = new RestRequest($"Cidades/Put/{codigo}");
+            var request = new RestRequest($"Clientes/Put/{codigo}");
 
-            request.AddJsonBody(cidade);
+            request.AddJsonBody(cliente);
 
             var response = _restClient.GetAsync(request).Result;
 
@@ -92,7 +92,7 @@ namespace ProvaCandidato.Application.ApiProvaCandidato.Cidade
 
         public IReturn Delete(int codigo)
         {
-            var request = new RestRequest($"Cidades/Delete/{codigo}");
+            var request = new RestRequest($"Clientes/Delete/{codigo}");
 
             var response = _restClient.GetAsync(request).Result;
 

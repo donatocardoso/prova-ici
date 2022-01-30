@@ -1,4 +1,4 @@
-﻿namespace ProvaCandidato.Application.ApiProvaCandidato
+﻿namespace ProvaCandidato.Application.ApiProvaCandidato.Cidade.Models
 {
     public class CidadeModel
     {
