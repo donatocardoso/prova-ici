@@ -10,7 +10,7 @@ namespace ProvaCandidato.Domain.Cliente
         IReturn<IEnumerable<ClienteDto>> GetAll();
         IReturn<ClienteDto> GetByCodigo(int codigo);
         IReturn<ClienteDto> GetByNome(string nome);
-        IReturn<ClienteDto> Post(string nome, DateTime dataNascimento, int cidadeId);
+        IReturn Post(string nome, DateTime dataNascimento, int cidadeId);
         IReturn Put(int codigo, ClienteDto cliente);
         IReturn Delete(int codigo);
     }

@@ -29,7 +29,7 @@ namespace ProvaCandidato.Domain.Cliente
             return _clienteRepository.GetByNome(nome);
         }
 
-        public IReturn<ClienteDto> Post(string nome, DateTime dataNascimento, int cidadeId)
+        public IReturn Post(string nome, DateTime dataNascimento, int cidadeId)
         {
             return _clienteRepository.Post(new ClienteDto()
             {
