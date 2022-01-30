@@ -67,7 +67,7 @@ namespace ProvaCandidato.Api.Controllers
         }
 
         [HttpPut, Route("Put/{codigo}")]
-        public IHttpActionResult Put(int codigo, CidadeDto cidade)
+        public IHttpActionResult Put(int codigo, [FromBody] CidadeDto cidade)
         {
             var response = _cidadeService.Put(codigo, cidade);
 

@@ -73,13 +73,13 @@ namespace ProvaCandidato.Repositories.Cidade
             return Return.Success($"Cidade encontrada", cidade);
         }
 
-        public IReturn<CidadeDto> Post(CidadeDto cidade)
+        public IReturn Post(CidadeDto cidade)
         {
             var exist = GetByNome(cidade.Nome);
 
             if (exist.IsSuccess && exist.Content != null)
             {
-                return Return.Fail<CidadeDto>("Cidade já cadastrada");
+                return Return.Fail("Cidade já cadastrada");
             }
 
             _db.Execute(@"
@@ -92,7 +92,7 @@ namespace ProvaCandidato.Repositories.Cidade
                 Nome = cidade.Nome,
             });
 
-            return Return.Success("Cidade já cadastrada", exist.Content);
+            return Return.Success("Cidade cadastrada");
         }
 
         public IReturn Put(int codigo, CidadeDto cidade)
