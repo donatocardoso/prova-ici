@@ -1,7 +1,7 @@
 ﻿using ProvaCandidato.Domain.Health;
 using System.Web.Http;
 
-namespace ProvaCandidato.Web.Controllers
+namespace ProvaCandidato.Api.Controllers
 {
     [RoutePrefix("Health")]
     public class HealthController : ApiController
