@@ -1,4 +1,5 @@
 ﻿using ProvaCandidato.Api.Resolver;
+using ProvaCandidato.Domain.Health;
 using System.Net.Http.Headers;
 using System.Web.Http;
 using Unity;
@@ -9,12 +10,6 @@ namespace ProvaCandidato.Web
     {
         public static void Register(HttpConfiguration config)
         {
-            var container = new UnityContainer();
-
-            //container.RegisterType<IUnitOfWork, UnitOfWork>();
-
-            config.DependencyResolver = new UnityResolver(container);
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -25,6 +20,20 @@ namespace ProvaCandidato.Web
             );
 
             config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
+            config.DependencyResolver = new UnityResolver(DependencyInjection());
+        }
+
+        private static UnityContainer DependencyInjection()
+        {
+            var container = new UnityContainer();
+
+            // Services
+
+            container.RegisterType<IHealthService, HealthService>();
+
+            // Repositories
+
+            return container;
         }
     }
 }
