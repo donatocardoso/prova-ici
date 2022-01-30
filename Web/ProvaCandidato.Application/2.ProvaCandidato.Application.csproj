@@ -78,7 +78,12 @@
   <ItemGroup>
     <Compile Include="ApiProvaCandidato\ApiProvaCandidatoApplication.cs" />
     <Compile Include="ApiProvaCandidato\Cidade\CidadeApplication.cs" />
+    <Compile Include="ApiProvaCandidato\Cidade\ICidadeApplication.cs" />
     <Compile Include="ApiProvaCandidato\Cidade\Models\CidadeModel.cs" />
+    <Compile Include="ApiProvaCandidato\Cliente\ClienteApplication.cs" />
+    <Compile Include="ApiProvaCandidato\Cliente\IClienteApplication.cs" />
+    <Compile Include="ApiProvaCandidato\Cliente\Models\ClienteModel.cs" />
+    <Compile Include="ApiProvaCandidato\IApiProvaCandidatoApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
