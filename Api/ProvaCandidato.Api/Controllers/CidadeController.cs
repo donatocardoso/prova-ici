@@ -14,7 +14,7 @@ namespace ProvaCandidato.Api.Controllers
             _cidadeService = cidadeService;
         }
 
-        [HttpGet]
+        [HttpGet, Route("GetAll")]
         public IHttpActionResult GetAll()
         {
             var cidades = _cidadeService.GetAll();
@@ -27,7 +27,7 @@ namespace ProvaCandidato.Api.Controllers
             return Ok(cidades);
         }
 
-        [HttpGet]
+        [HttpGet, Route("GetByCodigo/{codigo}")]
         public IHttpActionResult GetByCodigo(int codigo)
         {
             var cidade = _cidadeService.GetByCodigo(codigo);
@@ -40,7 +40,7 @@ namespace ProvaCandidato.Api.Controllers
             return Ok(cidade);
         }
 
-        [HttpGet]
+        [HttpGet, Route("GetByNome/{nome}")]
         public IHttpActionResult GetByNome(string nome)
         {
             var cidade = _cidadeService.GetByNome(nome);
@@ -53,7 +53,7 @@ namespace ProvaCandidato.Api.Controllers
             return Ok(cidade);
         }
 
-        [HttpPost]
+        [HttpPost, Route("Post")]
         public IHttpActionResult Post(string nome)
         {
             var response = _cidadeService.Post(nome);
@@ -66,7 +66,7 @@ namespace ProvaCandidato.Api.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPut, Route("Put/{codigo}")]
         public IHttpActionResult Put(int codigo, CidadeDto cidade)
         {
             var response = _cidadeService.Put(codigo, cidade);
@@ -79,7 +79,7 @@ namespace ProvaCandidato.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete]
+        [HttpDelete, Route("Delete/{codigo}")]
         public IHttpActionResult Delete(int codigo)
         {
             var response = _cidadeService.Delete(codigo);

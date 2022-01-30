@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Http;
 
-namespace ProvaCandidato.Web
+namespace ProvaCandidato.Api
 {
     public class WebApiApplication : HttpApplication
     {

@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="ProvaCandidato.Web.WebApiApplication" Language="C#" %>
+﻿<%@ Application CodeBehind="Global.asax.cs" Inherits="ProvaCandidato.Api.WebApiApplication" Language="C#" %>

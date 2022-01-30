@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using Unity;
 
-namespace ProvaCandidato.Web
+namespace ProvaCandidato.Api
 {
     public static class WebApiConfig
     {

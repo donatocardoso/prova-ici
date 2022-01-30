@@ -3,7 +3,7 @@ using System.Web.Http;
 
 namespace ProvaCandidato.Api.Controllers
 {
-    [RoutePrefix("Health")]
+    [RoutePrefix("api/v1/Health")]
     public class HealthController : ApiController
     {
         private readonly IHealthService _healthService;
