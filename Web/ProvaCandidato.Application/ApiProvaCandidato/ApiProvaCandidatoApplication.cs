@@ -3,9 +3,10 @@ using ProvaCandidato.Application.ApiProvaCandidato.Cliente;
 
 namespace ProvaCandidato.Application.ApiProvaCandidato
 {
-    public class ApiProvaCandidatoApplication
+    public class ApiProvaCandidatoApplication : IApiProvaCandidatoApplication
     {
-        public CidadeApplication Cidade => new CidadeApplication();
-        public ClienteApplication Cliente => new ClienteApplication();
+        public ICidadeApplication Cidade => new CidadeApplication();
+
+        public IClienteApplication Cliente => new ClienteApplication();
     }
 }
