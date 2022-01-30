@@ -1,6 +1,7 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 
-namespace ProvaCandidato.Controllers
+namespace ProvaCandidato.Web.Controllers
 {
     [RoutePrefix("Health")]
     public class HealthController : ApiController
@@ -8,7 +9,10 @@ namespace ProvaCandidato.Controllers
         [HttpGet, Route("Ping")]
         public IHttpActionResult Ping()
         {
-            return Ok();
+            return Ok(new
+            {
+                DateTime = DateTime.Now
+            });
         }
     }
 }
