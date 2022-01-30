@@ -1,6 +1,5 @@
 ﻿using ProvaCandidato.Domain.Cliente.Dtos;
 using ProvaCandidato.Utils.Commons;
-using System;
 using System.Collections.Generic;
 
 namespace ProvaCandidato.Domain.Cliente
@@ -10,7 +9,7 @@ namespace ProvaCandidato.Domain.Cliente
         IReturn<IEnumerable<ClienteDto>> GetAll();
         IReturn<ClienteDto> GetByCodigo(int codigo);
         IReturn<ClienteDto> GetByNome(string nome);
-        IReturn Post(string nome, DateTime dataNascimento, int cidadeId);
+        IReturn Post(ClienteDto cliente);
         IReturn Put(int codigo, ClienteDto cliente);
         IReturn Delete(int codigo);
     }

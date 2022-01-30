@@ -28,12 +28,9 @@ namespace ProvaCandidato.Domain.Cidade
             return _cidadeRepository.GetByNome(nome);
         }
 
-        public IReturn Post(string nome)
+        public IReturn Post(CidadeDto cidade)
         {
-            return _cidadeRepository.Post(new CidadeDto()
-            {
-                Nome = nome,
-            });
+            return _cidadeRepository.Post(cidade);
         }
 
         public IReturn Put(int codigo, CidadeDto cidade)

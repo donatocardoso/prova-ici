@@ -9,7 +9,7 @@ namespace ProvaCandidato.Domain.Cidade
         IReturn<IEnumerable<CidadeDto>> GetAll();
         IReturn<CidadeDto> GetByCodigo(int codigo);
         IReturn<CidadeDto> GetByNome(string nome);
-        IReturn Post(string nome);
+        IReturn Post(CidadeDto cidade);
         IReturn Put(int codigo, CidadeDto cidade);
         IReturn Delete(int codigo);
     }

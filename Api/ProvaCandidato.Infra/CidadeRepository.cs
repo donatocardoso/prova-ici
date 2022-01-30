@@ -87,10 +87,7 @@ namespace ProvaCandidato.Repositories.Cidade
                        ([Nome])
                  VALUES
                        (@Nome)
-            ", new
-            {
-                Nome = cidade.Nome,
-            });
+            ", cidade);
 
             return Return.Success("Cidade cadastrada");
         }
@@ -108,11 +105,7 @@ namespace ProvaCandidato.Repositories.Cidade
                 UPDATE [dbo].[Cidade]
                     SET [Nome] = @Nome
                 WHERE [Codigo] = @Codigo
-            ", new
-            {
-                Codigo = codigo,
-                Nome = cidade.Nome,
-            });
+            ", cidade);
 
             return Return.Success("Cidade atualizada");
         }

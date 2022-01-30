@@ -54,9 +54,9 @@ namespace ProvaCandidato.Api.Controllers
         }
 
         [HttpPost, Route("Post")]
-        public IHttpActionResult Post(string nome)
+        public IHttpActionResult Post([FromBody] CidadeDto cidade)
         {
-            var response = _cidadeService.Post(nome);
+            var response = _cidadeService.Post(cidade);
 
             if (!response.IsSuccess)
             {

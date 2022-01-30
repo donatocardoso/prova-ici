@@ -1,6 +1,5 @@
 ﻿using ProvaCandidato.Domain.Cliente;
 using ProvaCandidato.Domain.Cliente.Dtos;
-using System;
 using System.Web.Http;
 
 namespace ProvaCandidato.Api.Controllers
@@ -55,9 +54,9 @@ namespace ProvaCandidato.Api.Controllers
         }
 
         [HttpPost, Route("Post")]
-        public IHttpActionResult Post(string nome, DateTime dataNascimento, int cidadeId)
+        public IHttpActionResult Post([FromBody] ClienteDto cliente)
         {
-            var response = _clienteService.Post(nome, dataNascimento, cidadeId);
+            var response = _clienteService.Post(cliente);
 
             if (!response.IsSuccess)
             {

@@ -1,16 +1,18 @@
-﻿using ProvaCandidato.Domain.Cliente.Dtos;
+﻿using ProvaCandidato.Domain.Cidade;
+using ProvaCandidato.Domain.Cliente.Dtos;
 using ProvaCandidato.Utils.Commons;
-using System;
 using System.Collections.Generic;
 
 namespace ProvaCandidato.Domain.Cliente
 {
     public class ClienteService : IClienteService
     {
+        private readonly ICidadeRepository _cidadeRepository;
         private readonly IClienteRepository _clienteRepository;
 
-        public ClienteService(IClienteRepository clienteRepository)
+        public ClienteService(ICidadeRepository cidadeRepository, IClienteRepository clienteRepository)
         {
+            _cidadeRepository = cidadeRepository;
             _clienteRepository = clienteRepository;
         }
 
@@ -29,18 +31,27 @@ namespace ProvaCandidato.Domain.Cliente
             return _clienteRepository.GetByNome(nome);
         }
 
-        public IReturn Post(string nome, DateTime dataNascimento, int cidadeId)
+        public IReturn Post(ClienteDto cliente)
         {
-            return _clienteRepository.Post(new ClienteDto()
+            var cidadeExists = _cidadeRepository.GetByCodigo(cliente.CidadeId);
+
+            if (!cidadeExists.IsSuccess)
             {
-                Nome = nome,
-                DataNascimento = dataNascimento,
-                CidadeId = cidadeId,
-            });
+                return Return.Fail("Código de cidade inválido");
+            }
+
+            return _clienteRepository.Post(cliente);
         }
 
         public IReturn Put(int codigo, ClienteDto cliente)
         {
+            var cidadeExists = _cidadeRepository.GetByCodigo(cliente.CidadeId);
+
+            if (!cidadeExists.IsSuccess)
+            {
+                return Return.Fail("Código de cidade inválido");
+            }
+
             return _clienteRepository.Put(codigo, cliente);
         }
 
