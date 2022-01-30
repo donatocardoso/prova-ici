@@ -195,12 +195,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CidadeController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\WebController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Cliente\ClienteAlterarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Images\ExemploPartialView.jpg" />
@@ -307,6 +309,9 @@
     <Content Include="Views\Shared\Info.cshtml" />
     <Content Include="Views\Shared\Success.cshtml" />
     <Content Include="Views\Shared\Warning.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\_Alterar.cshtml" />
+    <Content Include="Views\Cliente\_Cadastrar.cshtml" />
     <None Include="Web.Production.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

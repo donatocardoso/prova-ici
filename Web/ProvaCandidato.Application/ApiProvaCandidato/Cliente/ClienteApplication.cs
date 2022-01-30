@@ -16,7 +16,7 @@ namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente
             _restClient = new RestClient(WebEnvironment.ApiProvaCandidato);
         }
 
-        public IReturn<IEnumerable<ClienteModel>> GetAll()
+        public IReturn<List<ClienteModel>> GetAll()
         {
             var request = new RestRequest("Clientes/GetAll");
 
@@ -24,10 +24,10 @@ namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente
 
             if (!response.IsSuccessful)
             {
-                return Return.Fail<IEnumerable<ClienteModel>>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
+                return Return.Fail<List<ClienteModel>>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn<IEnumerable<ClienteModel>>>(response.Content);
+            return JsonConvert.DeserializeObject<ReturnModel<List<ClienteModel>>>(response.Content);
         }
 
         public IReturn<ClienteModel> GetByCodigo(int codigo)
@@ -41,7 +41,7 @@ namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente
                 return Return.Fail<ClienteModel>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn<ClienteModel>>(response.Content);
+            return JsonConvert.DeserializeObject<ReturnModel<ClienteModel>>(response.Content);
         }
 
         public IReturn<ClienteModel> GetByNome(string nome)
@@ -55,7 +55,7 @@ namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente
                 return Return.Fail<ClienteModel>($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn<ClienteModel>>(response.Content);
+            return JsonConvert.DeserializeObject<ReturnModel<ClienteModel>>(response.Content);
         }
 
         public IReturn Post(ClienteModel cliente)
@@ -64,44 +64,44 @@ namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente
 
             request.AddJsonBody(cliente);
 
-            var response = _restClient.GetAsync(request).Result;
+            var response = _restClient.PostAsync(request).Result;
 
             if (!response.IsSuccessful)
             {
                 return Return.Fail($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn>(response.Content);
+            return JsonConvert.DeserializeObject<ReturnModel>(response.Content);
         }
 
-        public IReturn Put(int codigo, ClienteModel cliente)
+        public IReturn Put(ClienteModel cliente)
         {
-            var request = new RestRequest($"Clientes/Put/{codigo}");
+            var request = new RestRequest($"Clientes/Put/{cliente.Codigo}");
 
             request.AddJsonBody(cliente);
 
-            var response = _restClient.GetAsync(request).Result;
+            var response = _restClient.PutAsync(request).Result;
 
             if (!response.IsSuccessful)
             {
                 return Return.Fail($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn>(response.Content);
+            return JsonConvert.DeserializeObject<ReturnModel>(response.Content);
         }
 
         public IReturn Delete(int codigo)
         {
             var request = new RestRequest($"Clientes/Delete/{codigo}");
 
-            var response = _restClient.GetAsync(request).Result;
+            var response = _restClient.DeleteAsync(request).Result;
 
             if (!response.IsSuccessful)
             {
                 return Return.Fail($"Falha ao conectar a api, detalhes: {response.ErrorMessage}");
             }
 
-            return JsonConvert.DeserializeObject<IReturn>(response.Content);
+            return JsonConvert.DeserializeObject<ReturnModel>(response.Content);
         }
     }
 }

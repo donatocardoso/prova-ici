@@ -1,0 +1,123 @@
+﻿@using ProvaCandidato.Web.ViewModels.Cliente
+
+@model ClienteAlterarViewModel
+
+@{
+    ViewBag.Title = "Alterar Cliente";
+}
+
+<div id="modalAlterar" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Alterar Cliente</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <input type="hidden" id="txtCodigo" value="@Model.Cliente.Codigo" />
+
+                <form>
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label for="txtNome" class="form-label">Nome</label>
+                            <input type="text" class="form-control form-control-sm" id="txtNome" aria-describedby="nomeHelp" value="@Model.Cliente.Nome">
+
+                            <div id="nomeHelp" class="form-text">Tamanho entre 3 e 50 caracteres</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label for="txtDataNasc" class="form-label">Data de Nascimento</label>
+                            <input type="text" class="form-control form-control-sm" id="txtDataNasc" aria-describedby="dataNascHelp" value="@(Model.Cliente.DataNascimento?.ToString("dd-MM-yyyy"))">
+
+                            <div id="dataNascHelp" class="form-text">Entre 01-01-1900 e @DateTime.Now.ToString("dd-MM-yyyy")</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <label for="selCidade" class="form-label">Cidade</label>
+                            <select class="form-control form-select-sm" aria-label="Cidade" id="selCidade" aria-describedby="cidadeHelp">
+                                @foreach (var cidade in Model.Cidades)
+                                {
+                                    if (cidade.Codigo == Model.Cliente.CidadeId)
+                                    {
+                                        <option value="@cidade.Codigo" selected>@cidade.Nome</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@cidade.Codigo">@cidade.Nome</option>
+                                    }
+                                }
+                            </select>
+
+                            <div id="cidadeHelp" class="form-text">Escolha uma cidade</div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Voltar</button>
+                <button type="button" class="btn btn-primary" onclick="Alterar();">Alterar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function Alterar() {
+        const codigo = $("#txtCodigo").val();
+        const nome = $("#txtNome").val();
+        const dataNasc = $("#txtDataNasc").val();
+        const cidadeId = $("#selCidade").val();
+
+        if (!nome) {
+            return alert("Por favor informe o nome da cliente.");
+        }
+
+        if (nome.trim().length < 3) {
+            return alert("Por favor informe o nome da cliente, com mais de 3 caracteres.");
+        }
+
+        if (nome.trim().length > 50) {
+            return alert("Por favor informe o nome da cliente, com menos de 50 caracteres.");
+        }
+
+        if (new Date(dataNasc) < new Date("01-01-1900")) {
+            return Warning("Por favor informe uma data de nascimento maior que 01-01-1900");
+        }
+
+        if (new Date(dataNasc) > new Date()) {
+            return Warning("Por favor informe uma data de nascimento menor que {DateTime.Now:dd-mm-yyyy}");
+        }
+
+        if (!cidadeId || cidadeId < 1) {
+            return Warning("Por favor informe um código de cidade válido");
+        }
+
+        $.ajax({
+            method: "POST",
+            url: "/Cliente/Put",
+            data: {
+                Codigo: codigo,
+                Nome: nome,
+                DataNascimento: dataNasc,
+                CidadeId: cidadeId,
+            },
+        })
+            .done((data) => $("html").html(data))
+            .fail((xhr) => Alert.html(xhr.responseText));
+    }
+
+    $(document).ready(function () {
+        var ModalAlterar = new bootstrap.Modal($('#modalAlterar'), {
+            keyboard: false
+        })
+
+        ModalAlterar.show();
+    })
+</script>

@@ -105,7 +105,12 @@ namespace ProvaCandidato.Repositories.Cliente
                             @DataNascimento,
                             @CidadeId,
                             1)
-            ", cliente);
+            ", new
+            {
+                Nome = cliente.Nome,
+                DataNascimento = cliente.DataNascimento?.ToString("yyyy-MM-dd"),
+                CidadeId = cliente.CidadeId,
+            });
 
             return Return.Success("Cliente cadastrado");
         }

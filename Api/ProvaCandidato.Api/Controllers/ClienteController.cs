@@ -19,11 +19,6 @@ namespace ProvaCandidato.Api.Controllers
         {
             var clientes = _clienteService.GetAll();
 
-            if (!clientes.IsSuccess)
-            {
-                return BadRequest(clientes);
-            }
-
             return Ok(clientes);
         }
 

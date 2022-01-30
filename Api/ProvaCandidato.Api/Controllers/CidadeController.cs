@@ -19,11 +19,6 @@ namespace ProvaCandidato.Api.Controllers
         {
             var cidades = _cidadeService.GetAll();
 
-            if (!cidades.IsSuccess)
-            {
-                return BadRequest(cidades);
-            }
-
             return Ok(cidades);
         }
 
