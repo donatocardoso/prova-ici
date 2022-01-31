@@ -56,14 +56,20 @@ Utiliza o conceito de [Microsserviço Orientado a DDD](https://docs.microsoft.co
 
 A estrutura do BackEnd consiste em:
 
-    .
-    ├── build                   # Compiled files (alternatively `dist`)
-    ├── docs                    # Documentation files (alternatively `doc`)
-    ├── src                     # Source files (alternatively `lib` or `app`)
-    ├── test                    # Automated tests (alternatively `spec` or `tests`)
-    ├── tools                   # Tools and utilities
-    ├── LICENSE
-    └── README.md
+    .  
+    ├── 1.ProvaCandidato.Api                # Endpoints
+    │   ├── App_Start                       # Arquivos de configuração do projeto
+    │   ├── Controllers                     # Controladores dos endpoints
+    │   └── Resolver                        # Gerenciador de Injeção de Dependência
+    |
+    ├── 2.ProvaCandidato.Domain             # Regras de Negócio    
+    |
+    ├── 3.ProvaCandidato.Infra              # Manipulação de Dados
+    |
+    └── 4.ProvaCandidato.Utils              # Utilitários
+        ├── Commons                         # Retornos pradronizados
+        ├── Connections                     # Conexões com Banco de Dados
+        └── Environment                     # Váriaveis de Ambiente
 
 ---
 ## Uso
