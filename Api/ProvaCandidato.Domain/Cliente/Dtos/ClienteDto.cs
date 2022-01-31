@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProvaCandidato.Domain.Cidade.Dtos;
+using System;
 
 namespace ProvaCandidato.Domain.Cliente.Dtos
 {
@@ -11,6 +12,8 @@ namespace ProvaCandidato.Domain.Cliente.Dtos
         public DateTime? DataNascimento { get; set; }
 
         public int CidadeId { get; set; }
+
+        public CidadeDto Cidade { get; set; }
 
         public bool Ativo { get; set; }
     }

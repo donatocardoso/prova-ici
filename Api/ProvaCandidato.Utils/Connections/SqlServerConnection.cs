@@ -1,12 +1,11 @@
 ﻿using ProvaCandidato.Utils.Environment;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace ProvaCandidato.Utils.Connections
 {
     public class SqlServerConnection
     {
-        protected readonly IDbConnection _db;
+        protected readonly SqlConnection _db;
 
         public SqlServerConnection()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProvaCandidato.Application.ApiProvaCandidato.Cidade.Models;
+using System;
 
 namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente.Models
 {
@@ -11,6 +12,8 @@ namespace ProvaCandidato.Application.ApiProvaCandidato.Cliente.Models
         public DateTime? DataNascimento { get; set; }
 
         public int CidadeId { get; set; }
+
+        public CidadeModel Cidade { get; set; }
 
         public bool Ativo { get; set; }
     }

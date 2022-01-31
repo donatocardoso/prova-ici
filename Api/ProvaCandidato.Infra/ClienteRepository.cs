@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using ProvaCandidato.Domain.Cidade.Dtos;
 using ProvaCandidato.Domain.Cliente;
 using ProvaCandidato.Domain.Cliente.Dtos;
 using ProvaCandidato.Utils.Commons;
@@ -16,16 +17,29 @@ namespace ProvaCandidato.Repositories.Cliente
 
         public IReturn<IEnumerable<ClienteDto>> GetAll()
         {
-            var clientes = _db.Query<ClienteDto>(@"
+            var clientes = _db.Query<ClienteDto, CidadeDto, ClienteDto>(@"
                 SELECT 
-                    [Codigo],
-                    [Nome],
-                    [DataNascimento],
-                    [CidadeId],
-                    [Ativo]
-                FROM [dbo].[Cliente]
-                WHERE [Ativo] = 1
-            ");
+                    [CL].[Codigo],
+                    [CL].[Nome],
+                    [CL].[DataNascimento],
+                    [CL].[CidadeId],
+                    [CL].[Ativo],
+                    
+                    [CI].[Codigo],
+                    [CI].[Nome]
+
+                FROM [dbo].[Cliente] AS [CL]
+                    INNER JOIN [dbo].[Cidade] AS [CI]
+                        ON [CI].[Codigo] = [CL].[CidadeId]
+                WHERE [CL].[Ativo] = 1
+            ",
+            (cli, cid) =>
+            {
+                cli.Cidade = cid;
+
+                return cli;
+            },
+            splitOn: "Codigo");
 
             if (!clientes.Any())
             {
@@ -37,20 +51,34 @@ namespace ProvaCandidato.Repositories.Cliente
 
         public IReturn<ClienteDto> GetByCodigo(int codigo)
         {
-            var cliente = _db.QueryFirstOrDefault<ClienteDto>(@"
+            var cliente = _db.Query<ClienteDto, CidadeDto, ClienteDto>(@"
                 SELECT 
-                    [Codigo],
-                    [Nome],
-                    [DataNascimento],
-                    [CidadeId],
-                    [Ativo]
-                FROM [dbo].[Cliente]
-                WHERE [Ativo] = 1
-                    AND [Codigo] = @Codigo
-            ", new
+                    [CL].[Codigo],
+                    [CL].[Nome],
+                    [CL].[DataNascimento],
+                    [CL].[CidadeId],
+                    [CL].[Ativo],
+                    
+                    [CI].[Codigo],
+                    [CI].[Nome]
+
+                FROM [dbo].[Cliente] AS [CL]
+                    INNER JOIN [dbo].[Cidade] AS [CI]
+                        ON [CI].[Codigo] = [CL].[CidadeId]
+                WHERE [CL].[Ativo] = 1
+                    AND [CL].[Codigo] = @Codigo
+            ",
+            (cli, cid) =>
+            {
+                cli.Cidade = cid;
+
+                return cli;
+            },
+            new
             {
                 Codigo = codigo,
-            });
+            },
+            splitOn: "Codigo").FirstOrDefault();
 
             if (cliente == null)
             {
@@ -62,20 +90,34 @@ namespace ProvaCandidato.Repositories.Cliente
 
         public IReturn<ClienteDto> GetByNome(string nome)
         {
-            var cliente = _db.QueryFirstOrDefault<ClienteDto>(@"
+            var cliente = _db.Query<ClienteDto, CidadeDto, ClienteDto>(@"
                 SELECT 
-                    [Codigo],
-                    [Nome],
-                    [DataNascimento],
-                    [CidadeId],
-                    [Ativo]
-                FROM [dbo].[Cliente]
-                WHERE [Ativo] = 1
-                    AND [Nome] LIKE @Nome
-            ", new
+                    [CL].[Codigo],
+                    [CL].[Nome],
+                    [CL].[DataNascimento],
+                    [CL].[CidadeId],
+                    [CL].[Ativo],
+                    
+                    [CI].[Codigo],
+                    [CI].[Nome]
+
+                FROM [dbo].[Cliente] AS [CL]
+                    INNER JOIN [dbo].[Cidade] AS [CI]
+                        ON [CI].[Codigo] = [CL].[CidadeId]
+                WHERE [CL].[Ativo] = 1
+                    AND [CL].[Nome] LIKE @Nome
+            ",
+            (cli, cid) =>
+            {
+                cli.Cidade = cid;
+
+                return cli;
+            },
+            new
             {
                 Nome = $"%{nome}%",
-            });
+            },
+            splitOn: "Codigo").FirstOrDefault();
 
             if (cliente == null)
             {
