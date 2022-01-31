@@ -10,3 +10,29 @@ span.material-icons[onclick] {
         text-shadow: 0 5px 5px #8a8a8a;
     }
 
+.accordion-button::after {
+    margin-right: 0;
+}
+
+/* CUSTOM */
+.bg-menu {
+    color: #0c63e4;
+    background-color: #e7f1ff;
+    border: 1px solid #0c63e4;
+}
+
+.page-data {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-left: 1px solid #0c63e4;
+    border-right: 1px solid #0c63e4;
+}
+
+.bg-footer {
+    color: #0c63e4;
+    background-color: #e7f1ff;
+    border: 1px solid #0c63e4;
+    border-collapse: collapse;
+    padding: 20px 0;
+    text-align: center;
+}
